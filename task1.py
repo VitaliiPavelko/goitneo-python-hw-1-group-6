@@ -9,6 +9,19 @@ CONGRATULATION_WEEKDAYS = [
     'Friday',
 ]
 
+# As far the task conditions aren't clear enough, so I've made some assumptions:
+#
+# - birthdays are chosen for the current working week, ending on Friday
+#   (Saturday and Sunday are not included as those days are moved
+#     to next week and should be put to Monday)
+#
+# - if current day is Saturday or Sunday,
+#      then interval contains days from current day to closest Friday
+#      (as Saturday and Sunday are put to Monday)
+#
+# - if current day is Monday, then birthdays are selected for the current week till Friday
+#   + previous Saturday and Sunday
+
 
 def get_birthdays_per_week(users):
     if not isinstance(users, list):
