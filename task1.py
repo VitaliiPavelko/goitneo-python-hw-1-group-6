@@ -1,18 +1,12 @@
 from datetime import datetime, timedelta
 from collections import defaultdict
 
-users = [
-    {"name": "David", "birthday": datetime(2023, 12, 1)},
-    {"name": "Eve", "birthday": datetime(2023, 12, 2)},
-    {"name": "Ivy", "birthday": datetime(2023, 12, 6)},
-    {"name": "Katie", "birthday": datetime(2023, 12, 8)},
-    {"name": "Frank", "birthday": datetime(2023, 12, 3)},
-    {"name": "Jack", "birthday": datetime(2023, 12, 7)},
-    {"name": "Grace", "birthday": datetime(2023, 12, 4)},
-    {"name": "Harry", "birthday": datetime(2023, 12, 5)},
-    {"name": "Liam", "birthday": datetime(2023, 12, 9)},
-    {"name": "Mia", "birthday": datetime(2023, 12, 10)},
-    {"name": "Noah", "birthday": datetime(2023, 12, 11)},
+CONGRATULATION_WEEKDAYS = [
+    'Monday',
+    'Tuesday',
+    'Wednesday',
+    'Thursday',
+    'Friday',
 ]
 
 
@@ -38,18 +32,13 @@ def get_birthdays_per_week(users):
         birhtday_this_year = birthday_date.replace(year=start_date.year)
 
         if start_date <= birhtday_this_year <= finish_date:
-            weekday = 'Monday'
+            weekday = 0
 
             if birhtday_this_year.weekday() not in [5, 6]:
-                weekday = birthday_date.strftime("%A")
+                weekday = birthday_date.weekday()
 
             result[weekday].append(user['name'])
 
-    print('start', start_date)
-    print('finish', finish_date)
-
-    return result
-
-
-a = get_birthdays_per_week(users)
-print(a)
+    for index, weekday in list(enumerate(CONGRATULATION_WEEKDAYS)):
+        if len(result[index]):
+            print(f"{weekday}: {', '.join(result[index])}")
